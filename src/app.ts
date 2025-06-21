@@ -32,6 +32,10 @@ app.post("/products", (req: Request, res: Response) => {
   });
 });
 
+//una endpoint para eliminar un producto
+//un endpoint para actualizar un producto
+//un endpoint para obtener un producto por id
+
 const PORT = 3000;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
