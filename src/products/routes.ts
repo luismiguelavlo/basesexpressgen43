@@ -9,8 +9,8 @@ import {
 
 export const router = Router();
 
-router.get("/products", findAllProducts);
-router.post("/products", createProduct);
-router.get("/products/:id", findOneProduct);
-router.delete("/products/:id", deleteProduct);
-router.patch("/products/:id", updateProduct);
+router.get("/", findAllProducts);
+router.post("/", createProduct);
+router.get("/:id", findOneProduct);
+router.delete("/:id", deleteProduct);
+router.patch("/:id", updateProduct);
