@@ -32,9 +32,54 @@ app.post("/products", (req: Request, res: Response) => {
   });
 });
 
+//un endpoint para obtener un producto por id
+app.get("/products/:id", (req: Request, res: Response) => {
+  const productId = +req.params.id;
+
+  const product = products.find((p) => p.id === productId);
+  if (!product) {
+    res.status(404).json({
+      message: "Product not found",
+    });
+    return;
+  }
+
+  res.status(200).json(product);
+});
+
+app.delete("/products/:id", (req: Request, res: Response) => {
+  const productId = +req.params.id;
+
+  const productIndex = products.findIndex((p) => p.id === productId);
+  if (productIndex === -1) {
+    res.status(404).json({
+      message: "Product not found",
+    });
+    return;
+  }
+  products.splice(productIndex, 1);
+  res.status(200).json({
+    message: "Product deleted successfully",
+  });
+});
 //una endpoint para eliminar un producto
 //un endpoint para actualizar un producto
-//un endpoint para obtener un producto por id
+app.patch("/products/:id", (req: Request, res: Response) => {
+  const productId = +req.params.id;
+  const productIndex = products.findIndex((p) => p.id === productId);
+  if (productIndex === -1) {
+    res.status(404).json({
+      message: "Product not found",
+    });
+    return;
+  }
+  const updateProduct = {
+    ...products[productIndex],
+    ...req.body,
+  };
+  products[productIndex] = updateProduct;
+  res.status(200).json(products);
+});
 
 const PORT = 3000;
 app.listen(PORT, () => {
